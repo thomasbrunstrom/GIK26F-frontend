@@ -1,7 +1,10 @@
-<template><!-- Html for our view -->
+<template>
+  <!-- Html for our view -->
   <div class="todos">
-    <h1>{{ msg }}</h1><!-- our property in props: msg -->
-    <p>{{ greeting }}</p><!-- Our greeting from data().greeting -->
+    <h1>{{ msg }}</h1>
+    <!-- our property in props: msg -->
+    <p>{{ greeting }}</p>
+    <!-- Our greeting from data().greeting -->
   </div>
 </template>
 
@@ -9,26 +12,27 @@
 //Logic for our view.
 
 // Include the service from parent directory.
-import RestService from '../RESTService';
+import RestService from "../RESTService";
 // Instanciate our service.
 const service = new RestService();
 
 export default {
-  name: 'Todos',
-  data()  {
+  name: "Todos",
+  data() {
     //Return a object which represent our data in this view.
     return {
-      greeting: 'Hello and welcome to laboration two!',
+      greeting: "Hello and welcome to part two!",
       todos: null, //Instanciated with null to let vue know were going to use this later
-      form: { // Empty object, add our form data
-      }
-    }
+      form: {
+        // Empty object, add our form data
+      },
+    };
   },
   props: {
-    // Gets populated from App.vue in the <todos> element 
+    // Gets populated from App.vue in the <todos> element
     // Name "msg" is a attribute on the todos element
     // see App.vue for clarification
-    msg: String
+    msg: String,
   },
   created() {
     //Gets called when the view is created
@@ -39,16 +43,16 @@ export default {
     this.getTodos();
   },
   methods: {
-    async getTodos() {
+    getTodos: async () => {
       try {
         let result = await service.getTodos();
         this.todos = result.data;
-      } catch(error) {
-        console.log(error);
+      } catch (error) {
+        //console.log(error);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
