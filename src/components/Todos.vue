@@ -5,6 +5,12 @@
     <!-- our property in props: msg -->
     <p>{{ greeting }}</p>
     <!-- Our greeting from data().greeting -->
+    {{todos}}
+    <ul>
+    <li v-for="item in todos" :key="item._id">
+      {{ item.text }}
+    </li>
+    </ul>
   </div>
 </template>
 
@@ -43,10 +49,10 @@ export default {
     this.getTodos();
   },
   methods: {
-    getTodos: async () => {
+    getTodos: async function() {
       try {
         let result = await service.getTodos();
-        this.todos = result.data;
+        this.todos = result.data.all;
       } catch (error) {
         //console.log(error);
       }
